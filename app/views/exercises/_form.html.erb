@@ -1,4 +1,4 @@
-iv class='row'>
+<div class='row'>
   <div class='col-md-12'>
     <%= form_for([current_user, @exercise], :html => {class: "form-horizontal", role: "form"}) do |f| %>
       <% if @exercise.errors.any? %>
@@ -36,7 +36,8 @@ iv class='row'>
           <%= f.label :workout_date, "Activity date" %>
         </div>
         <div class='col-md-10'>
-          <%= f.text_field :workout_date, class: 'form-control' %>
+          <%= f.text_field :workout_date, class: 'form-control',
+              id: 'workout-date' %>
         </div>
       </div>
 
