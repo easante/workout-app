@@ -1,6 +1,8 @@
 class ExercisesController < ApplicationController
   before_action :set_exercise, except: [:index, :new, :create]
+
   def index
+    @exercises = current_user.exercises.all
   end
 
   def show
