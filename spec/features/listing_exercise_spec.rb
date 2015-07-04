@@ -3,14 +3,15 @@ require "rails_helper"
 RSpec.feature "Listing Exercise" do
   before do
     @john = User.create(email: "john@example.com", password: "password")
-    login_as(@john)
 
-    @e1 = @john.exercises.create(duration_in_min: 20,
+
+    @e1 = @john.exercises.create(duration_in_min: 74,
                                 workout: "My body building activity",
-                                workout_date: Date.new)
+                                workout_date: "2015-07-03")
     @e2 = @john.exercises.create(duration_in_min: 55,
                                 workout: "Weight lifting",
-                                workout_date: Date.new)
+                                workout_date: "2015-07-03")
+    login_as(@john)
   end
 
   scenario "shows user's workout for last 7 days" do
