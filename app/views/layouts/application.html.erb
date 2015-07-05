@@ -22,27 +22,35 @@
           </div>
 
           <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li class="active"><%= link_to "Home", root_path %>
-                <span class="sr-only">(current)</span></li>
-            </ul>
+          <ul class="nav navbar-nav">
+            <li class="active"><%= link_to "Home", root_path %><span class="sr-only">(current)</span></li>
+            <% if user_signed_in? %>
+            <li><%= link_to "My Lounge", user_exercises_path(current_user) %></li>
+            <% end %>
+          </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-              <% if user_signed_in? %>
-                <li><%= link_to "My Lounge", user_exercises_path(current_user) %></li>
-                <li><%= link_to "Sign out", destroy_user_session_path,
-                              method: :delete %></li>
+          <%= form_tag(search_dashboard_path, class: "navbar-form navbar-left", role: "search") do %>
+            <div class="form-group">
+              <%= text_field_tag :search_name, nil, placeholder:"Search for friends", class: "form-control"  %>
+            </div>
+            <%= submit_tag "Search", class: 'btn btn-default' %>
+          <% end %>
 
-                <div class="navbar-right">
-                  <p class="navbar-text">
-                    Signed in as <%= "#{current_user.email}" %>
-                  </p>
-                </div>
-              <% else %>
-                <li><%= link_to "Sign up", new_user_registration_path %></li>
-                <li><%= link_to "Sign in", new_user_session_path %></li>
-              <% end %>
-            </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+            <li><%#= link_to "My Workouts", user_exercises_path(current_user) %></li>
+            <li><%#= link_to "New Workout", new_user_exercise_path(current_user) %></li>
+            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+              <div class="navbar-right">
+                <p class="navbar-text">
+                  Signed in as <%= "#{current_user.email}" %>
+                </p>
+              </div>
+            <% else %>
+              <li><%= link_to "Sign up", new_user_registration_path %></li>
+              <li><%= link_to "Sign in", new_user_session_path %></li>
+            <% end %>
+          </ul>
           </div>
 
         </div>
