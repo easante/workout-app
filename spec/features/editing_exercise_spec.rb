@@ -2,7 +2,10 @@ require "rails_helper"
 
 RSpec.feature "Editing Exercise" do
   before do
-    @owner = User.create(email: "owner@example.com", password: "password")
+    @owner = User.create(first_name: "Owner",
+                        last_name: "Doe",
+                        email: "owner@example.com",
+                        password: "password")
 
 
     @owner_exer = @owner.exercises.create!(duration_in_min: 48,
@@ -17,7 +20,6 @@ RSpec.feature "Editing Exercise" do
     click_link "My Lounge"
     link = "a[href='/users/#{@owner.id}/exercises/#{@owner_exer.id}/edit']"
     find(link).click
-    print page.html
     fill_in "Duration", with: 45
     click_button "Update Exercise"
 
